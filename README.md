@@ -13,3 +13,4 @@ the avg speeds and activity length will remain the same, but the start time will
 
 # WARNING 
 will not work on multi-day activities
+may mess up the times
