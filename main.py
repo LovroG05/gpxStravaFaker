@@ -14,7 +14,7 @@ def timedeltaget(time1, time2):
 
 def getnewdate(old_date, timedelta):
     old_date = arrow.get(old_date).datetime
-    new_date = old_date + timedelta
+    new_date = old_date - timedelta
     new_date = str(new_date)
     new_date = re.sub(" ", "T", new_date)
     new_date = re.sub("\+00:00", "Z", new_date)
@@ -33,17 +33,17 @@ root = tree.getroot()
 timenew = input("time[YYYY-MM-DDThh:mm:ssZ]>> ")
 
 # get timedelta
+print("previous activity start time: ", root[0][0].text)
 _timedelta = timedeltaget(root[0][0].text, timenew)
-print(_timedelta)
+print("time delta: ", _timedelta)
 
 # change initial time of gpx
 root[0][0].text = getnewdate(root[0][0].text, _timedelta)
+print("new start time: ", root[0][0].text)
 
 
-# https://arrow.readthedocs.io/en/stable/
 # change time and date in gps recordings
 for child in root[1][2]:
-    # print(child[1].tag, child[1].text)
     # change date and time
     new_date_gpx = getnewdate(child[1].text, _timedelta)
     # write date and time to gpx
