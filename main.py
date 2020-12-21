@@ -53,7 +53,8 @@ class GpxStravaFileMaker:
 
     def saveToFile(self, filename):
         # save the file
-        self.tree.write("newactivity.gpx")
+        self.tree.write(filename)
+        print("saving to file: ", filename)
 
 
 if __name__ == '__main__':
